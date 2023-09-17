@@ -26,9 +26,15 @@ const jsx: Factory<(arg: any) => JSX.Element> =
             let { children } = att
             if (!children) children = []
             if (!Array.isArray(children)) children = [children]
+
+            const props =
+                Object.entries(att)
+                    .filter(([k]) => k != "children")
+                    .map(([k, v]) => `${k}="${v}"`)
+                    .join(" ")
         
             return ``
-                +`<${tag}>`
+                +`<${tag} ${props}>`
                 +`${children.join("")}`
                 +`<${tag}/>`
         }
